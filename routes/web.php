@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OperationsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/index', [OperationsController::class, 'index'])->name('operations.index');
+Route::post('/index', [OperationsController::class, 'generate'])->name('operations.generate');
