@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
-use App\Services\TestService;
+use App\Services\{
+    TestService,
+    OperationService
+};
 
 class OperationsController extends Controller
 {
@@ -20,8 +23,8 @@ class OperationsController extends Controller
         // dd($tipo);
 
         $data = [];
-        $data = TestService::teste($tipo, $quantidade, $nivel, $data);
-        // dd($data);
+        // $data = TestService::teste($tipo, $quantidade, $nivel, $data);
+        $data = OperationService::selecionaOp($tipo, $nivel, $quantidade, $data);
         $pdf = Pdf::loadView('pdf', compact('data'));
         // $pdf = Pdf::loadHTML($data);
         return $pdf->stream();

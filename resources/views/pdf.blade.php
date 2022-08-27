@@ -9,11 +9,11 @@
 </head>
 
 <body>
-    @if (array_key_exists('Add', $data))
+    @if (array_key_exists('AddFacil', $data))
         <h2>Questões de Adição</h2>
         <hr>
-        @foreach ($data['Add'] as $key => $value)
-            <p>Texto: {{ $value['texto'] }}</p>
+        @foreach ($data['AddFacil'] as $key => $value)
+            <p>{{ $value['texto'] }}</p>
             <p>Resposta: {{ $value['resposta'] }}</p>
         @endforeach
         <hr>

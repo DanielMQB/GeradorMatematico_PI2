@@ -2,73 +2,72 @@
 
 namespace App\Services;
 
-class TestService{
+class OperationService
+{
 
-    public static function selecionaOp($tipo, $nivel, $quantidade,  $data){
-        if($tipo == "Add" && $nivel == 1){
-
+    public static function selecionaOp($tipo, $nivel, $quantidade,  $data)
+    {
+        if ($tipo == "Add" && $nivel == 1) {
+            $data = OperationService::addFacil($quantidade, $data);
+            return $data;
         }
     }
 
-    public static function addFacil($quantidade, $data){
-        //criando array com as questões e respectivas respostas
+    public static function addFacil($quantidade, $data)
+    {
+        //criando array que armazena string das questões e suas respostas
+        $tipo = 'AddFacil';
         $data[$tipo] = [];
 
-        //método genérico de geração de operações (somente texto)
-        for($i=0; $i<$quantidade;$i++){
-            $indice = count($data[$tipo])+1;
+        for ($i = 0; $i < $quantidade; $i++) {
+            //número da questão
+            //$indice = count($data[$tipo])+1;
 
+            //gerando questão (soma fácil)
+            $valores[0] = rand(1, 20);
+            $valores[1] = rand(1, 20);
+
+            //Escrevendo texto para impressão
+            $texto = ($i + 1) . ') ';
+            $aux = OperationService::geraTexto($valores);
+            $texto = $texto . $aux;
+
+            //gerando resultado
+            $res = OperationService::soma($valores);
+
+            //inserindo questão no array
             array_push($data[$tipo], [
-                'texto' => 'texto da questão '.$indice. ' (Nível: '.$nivel.' ).',       //3 + 4
-                'resposta' => 'resposta da questão '.$indice  // 7
+                'texto' => $texto,
+                'resposta' => $res
             ]);
         }
 
-        //Teste p/ operações múltiplas
-        $data['Sub'] = [];
-        $indice = count($data['Sub'])+1;
-        array_push($data['Sub'], [
-            'texto' => 'texto da questão '.$indice. ' (Nível: '.$nivel.' ).',       //3 + 4
-            'resposta' => 'resposta da questão '.$indice  // 7
-        ]);
-
-        dd($data);
+        // dd($data);
         return $data;
+    }
 
-        // $var2 = [
-        //     'questoes' => [
-        //         0 => [
-        //             'texto' => 'texto da questão 1',
-        //             'resposta' => 'resposta da questão 1'
-        //         ],
-        //         1 => [
-        //             'texto' => 'texto da questão 2',
-        //             'resposta' => 'resposta da questão 2'
-        //         ],
-        //         2 => [
-        //             'texto' => 'texto da questão 3',
-        //             'resposta' => 'resposta da questão 3'
-        //         ],
-        //         3 => [
-        //             'texto' => 'texto da questão 4',
-        //             'resposta' => 'resposta da questão 4'
-        //         ],
-        //     ]
-        // ];
+    public static function soma($valores)
+    {
+        $soma = 0;
 
-        // $var2['questoes'][4] = [
-        //     'texto' => 'texto da questão 5',
-        //     'resposta' => 'resposta da questão 5'
-        // ];
+        for($i=0; $i < count($valores); $i++){
+            $soma += $valores[$i];
+        }
 
-        // array_push($var2['questoes'], [
-        //     'texto' => 'texto da questão 6',
-        //     'resposta' => 'resposta da questão 6'
-        // ]);
+        return $soma;
+    }
 
-        // dd($var2);
+    public static function geraTexto($valores)
+    {
+        $texto = '';
+        for ($i = 0; $i < count($valores); $i++) {
+            if ($i < count($valores) - 1) {
+                $texto = $texto . $valores[$i] . ' + ';
+            } else {
+                $texto = $texto . $valores[$i];
+            }
+        }
 
-
-        // return $var2;
+        return $texto;
     }
 }
