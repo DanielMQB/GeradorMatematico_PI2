@@ -3,7 +3,14 @@
 namespace App\Services;
 
 class TestService{
-    public static function teste($tipo, $quantidade, $nivel, $data){
+
+    public static function selecionaOp($tipo, $nivel, $quantidade,  $data){
+        if($tipo == "Add" && $nivel == 1){
+
+        }
+    }
+
+    public static function addFacil($quantidade, $data){
         //criando array com as questões e respectivas respostas
         $data[$tipo] = [];
 

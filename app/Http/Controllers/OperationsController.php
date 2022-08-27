@@ -13,7 +13,14 @@ class OperationsController extends Controller
     }
 
     public function generate(Request $request){
-        $data = TestService::teste();
+        $tipo = $request->get('tipo');
+        $quantidade = $request->get('quantidade');
+        $nivel = $request->get('nivel');
+
+        // dd($tipo);
+
+        $data = [];
+        $data = TestService::teste($tipo, $quantidade, $nivel, $data);
         // dd($data);
         $pdf = Pdf::loadView('pdf', compact('data'));
         // $pdf = Pdf::loadHTML($data);
