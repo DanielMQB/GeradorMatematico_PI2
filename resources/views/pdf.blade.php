@@ -10,9 +10,27 @@
 
 <body>
     @if (array_key_exists('AddFacil', $data))
-        <h2>Questões de Adição</h2>
+        <h2>Questões de Adição ( Nível Fácil )</h2>
         <hr>
         @foreach ($data['AddFacil'] as $key => $value)
+            <p>{{ $value['texto'] }}</p>
+            <p>Resposta: {{ $value['resposta'] }}</p>
+        @endforeach
+        <hr>
+    @endif
+    @if (array_key_exists('AddIntermediario', $data))
+        <h2>Questões de Adição ( Nível Intermediário )</h2>
+        <hr>
+        @foreach ($data['AddIntermediario'] as $key => $value)
+            <p>{{ $value['texto'] }}</p>
+            <p>Resposta: {{ $value['resposta'] }}</p>
+        @endforeach
+        <hr>
+    @endif
+    @if (array_key_exists('AddAvancado', $data))
+        <h2>Questões de Adição ( Nível Avançado )</h2>
+        <hr>
+        @foreach ($data['AddAvancado'] as $key => $value)
             <p>{{ $value['texto'] }}</p>
             <p>Resposta: {{ $value['resposta'] }}</p>
         @endforeach
