@@ -25,18 +25,53 @@ class OperationService
         $tipo = 'AddFacil';
         $data[$tipo] = [];
 
-        for ($i = 0; $i < $quantidade; $i++) {
-            //número da questão
-            //$indice = count($data[$tipo])+1;
+        //Array auxiliar para verificar valores gerados em cada questão
+        $gerado_num_1 = [];
+        $gerado_num_2 = [];
 
-            //gerando questão (soma fácil, dois valores inteiros de 1 a 20)
-            $valores[0] = rand(1, 20);
-            $valores[1] = rand(1, 20);
+
+        for ($i = 0; $i < $quantidade; $i++) {
+
+            $gerados[$i] = [];
+
+            $valida = false;
+
+            while(!$valida){
+                //gerando valores da questão (soma fácil, dois valores inteiros de 1 a 20)
+                $valores[0] = rand(1, 20);
+                $valores[1] = rand(1, 20);
+
+                if ((in_array($valores[0], $gerado_num_1) && in_array($valores[1], $gerado_num_2)) ||
+                    (in_array($valores[1], $gerado_num_1) && in_array($valores[0], $gerado_num_2))) {
+                        $valida = false;
+                } else {
+                    $valida = true;
+                }
+
+            }
+
+                //Armazenando valores gerados em vetor auxiliar
+                array_push($gerado_num_1,
+                    $valores[0]
+                );
+
+                array_push($gerado_num_2,
+                    $valores[1]
+                );
+
+
+
+                //Comparando com valores gerados anteriormente
+                //$valida = OperationService::validaValores($gerados, $valores);
 
             //Escrevendo texto para impressão
             $texto = ($i + 1) . ') ';
+
+            //verificando se a questão gerada já existe
             $aux = OperationService::geraTexto($valores);
+
             $texto = $texto . $aux;
+
 
             //gerando resultado
             $res = OperationService::soma($valores);
@@ -82,6 +117,7 @@ class OperationService
         }
 
         // dd($data);
+
         return $data;
     }
 
@@ -143,5 +179,17 @@ class OperationService
         }
 
         return $texto;
+    }
+
+    public static function validaValores($gerados,$valores){
+        foreach($gerados as $aux){
+            sort($aux);
+            sort($valores);
+            dd($aux, $valores);
+            if($aux == $valores){
+                return false;
+            }
+        }
+        return true;
     }
 }
