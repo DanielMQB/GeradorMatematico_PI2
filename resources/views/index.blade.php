@@ -9,7 +9,7 @@
 <body>
     <h1>Especificações da Avaliação: </h1>
     <br>
-    <form action="{{ route('operations.generate') }}" method="POST">
+    <form action="{{ route('operations.generate') }}" method="POST" target="_blank">
         @csrf
 
         <label for="tipo">Tipo de questão:</label>

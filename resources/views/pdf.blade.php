@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <!-- Questões de Adição Simples -->
     @if (array_key_exists('AddFacil', $data))
         <h2>Questões de Adição ( Nível Fácil )</h2>
         <hr>
@@ -37,11 +38,30 @@
         <hr>
     @endif
 
-    @if (array_key_exists('Sub', $data))
-        <h2>Questões de Subtração</h2>
+    <!-- Questões de Subtração Simples -->
+    @if (array_key_exists('SubFacil', $data))
+        <h2>Questões de Subtração ( Nível Fácil )</h2>
         <hr>
-        @foreach ($data['Sub'] as $key => $value)
-            <p>Texto: {{ $value['texto'] }}</p>
+        @foreach ($data['SubFacil'] as $key => $value)
+            <p>{{ $value['texto'] }}</p>
+            <p>Resposta: {{ $value['resposta'] }}</p>
+        @endforeach
+        <hr>
+    @endif
+    @if (array_key_exists('SubIntermediario', $data))
+        <h2>Questões de Subtração ( Nível Intermediário )</h2>
+        <hr>
+        @foreach ($data['SubIntermediario'] as $key => $value)
+            <p>{{ $value['texto'] }}</p>
+            <p>Resposta: {{ $value['resposta'] }}</p>
+        @endforeach
+        <hr>
+    @endif
+    @if (array_key_exists('SubAvancado', $data))
+        <h2>Questões de Subtração ( Nível Avançado )</h2>
+        <hr>
+        @foreach ($data['SubAvancado'] as $key => $value)
+            <p>{{ $value['texto'] }}</p>
             <p>Resposta: {{ $value['resposta'] }}</p>
         @endforeach
         <hr>

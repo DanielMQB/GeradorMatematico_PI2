@@ -6,7 +6,8 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use App\Services\{
     TestService,
-    OperationService
+    SomaService,
+    SubService
 };
 
 class OperationsController extends Controller
@@ -24,7 +25,11 @@ class OperationsController extends Controller
 
         $data = [];
         // $data = TestService::teste($tipo, $quantidade, $nivel, $data);
-        $data = OperationService::selecionaOp($tipo, $nivel, $quantidade, $data);
+        if($tipo == 'Add'){
+            $data = SomaService::selecionaOp($tipo, $nivel, $quantidade, $data);
+        }else if($tipo == 'Sub'){
+            $data = SubService::selecionaOp($tipo, $nivel, $quantidade, $data);
+        }
         $pdf = Pdf::loadView('pdf', compact('data'));
         // $pdf = Pdf::loadHTML($data);
         return $pdf->stream();
