@@ -19,4 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('/index', [OperationsController::class, 'index'])->name('operations.index');
-Route::post('/index', [OperationsController::class, 'generate'])->name('operations.generate');
+Route::post('/generate', [OperationsController::class, 'generate'])->name('operations.generate');

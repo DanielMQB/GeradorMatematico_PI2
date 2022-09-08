@@ -12,22 +12,43 @@
     <form action="{{ route('operations.generate') }}" method="POST" target="_blank">
         @csrf
 
+        <p>Configurar Questão: </p> <br>
         <label for="tipo">Tipo de questão:</label>
-        <select name="tipo" id="tipo">
+        <select name="tipo[]" id="tipo">
             <option value="Add">Adição</option>
             <option value="Sub">Subtração</option>
             <option value="Mult">Multiplicação</option>
             <option value="Div">Divisão</option>
+            <option value="Null">Nenhum</option>
         </select>
 
         <label for="quantidade">Quantidade de questões</label>
-        <input type="int" name="quantidade" id="quantidade" placeholder="Num. de questões">
+        <input type="int" name="quantidade[]" id="quantidade" placeholder="Num. de questões">
 
-        <select name="nivel" id="nivel">
+        <select name="nivel[]" id="nivel">
             <option value="1">Fácil</option>
             <option value="2">Médio</option>
             <option value="3">Difícil</option>
+        </select><br>
+
+        <p>Configurar Questão: </p> <br>
+        <label for="tipo">Tipo de questão:</label>
+        <select name="tipo[]" id="tipo">
+            <option value="Add">Adição</option>
+            <option value="Sub">Subtração</option>
+            <option value="Mult">Multiplicação</option>
+            <option value="Div">Divisão</option>
+            <option value="Null">Nenhum</option>
         </select>
+
+        <label for="quantidade">Quantidade de questões</label>
+        <input type="int" name="quantidade[]" id="quantidade" placeholder="Num. de questões">
+
+        <select name="nivel[]" id="nivel">
+            <option value="1">Fácil</option>
+            <option value="2">Médio</option>
+            <option value="3">Difícil</option>
+        </select><br>
 
         <button type="submit">ENVIAR</button>
 

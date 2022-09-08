@@ -21,15 +21,18 @@ class OperationsController extends Controller
         $quantidade = $request->get('quantidade');
         $nivel = $request->get('nivel');
 
-        // dd($tipo);
-
+        $tamanho = count($tipo);
         $data = [];
-        // $data = TestService::teste($tipo, $quantidade, $nivel, $data);
-        if($tipo == 'Add'){
-            $data = SomaService::selecionaOp($tipo, $nivel, $quantidade, $data);
-        }else if($tipo == 'Sub'){
-            $data = SubService::selecionaOp($tipo, $nivel, $quantidade, $data);
+
+        for($i=0; $i < $tamanho; $i++){
+            // $data = TestService::teste($tipo, $quantidade, $nivel, $data);
+            if($tipo[$i] == 'Add'){
+                $data = SomaService::selecionaOp($tipo[$i], $nivel[$i], $quantidade[$i], $data);
+            }else if($tipo[$i] == 'Sub'){
+                $data = SubService::selecionaOp($tipo[$i], $nivel[$i], $quantidade[$i], $data);
+            }
         }
+
         $pdf = Pdf::loadView('pdf', compact('data'));
         // $pdf = Pdf::loadHTML($data);
         return $pdf->stream();

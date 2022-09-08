@@ -71,13 +71,7 @@ class SomaService
             // );
 
             //Escrevendo texto para impressão
-            $texto = ($i + 1) . ') ';
-
-            //verificando se a questão gerada já existe
-            $aux = SomaService::geraTexto($valores);
-
-            $texto = $texto . $aux;
-
+            $texto = SomaService::geraTexto($valores);
 
             //gerando resultado
             $res = SomaService::soma($valores);
@@ -121,9 +115,7 @@ class SomaService
             );
 
             //Escrevendo texto para impressão
-            $texto = ($i + 1) . ') ';
-            $aux = SomaService::geraTexto($valores);
-            $texto = $texto . $aux;
+            $texto = SomaService::geraTexto($valores);
 
             //gerando resultado
             $res = SomaService::soma($valores);
@@ -169,9 +161,7 @@ class SomaService
             );
 
             //Escrevendo texto para impressão
-            $texto = ($i + 1) . ') ';
-            $aux = SomaService::geraTexto($valores);
-            $texto = $texto . $aux;
+            $texto = SomaService::geraTexto($valores);
 
             //gerando resultado
             $res = SomaService::soma($valores);

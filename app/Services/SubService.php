@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use GuzzleHttp\Psr7\Message;
+
 class SubService
 {
 
@@ -24,6 +26,10 @@ class SubService
     {
         //criando array que armazena string das questões e suas respostas
         $tipo = 'SubFacil';
+        if(array_key_exists($tipo, $data)){
+            return redirect()->back()
+                ->with('message', 'A operação'.$tipo.'já foi inserida');
+        }
         $data[$tipo] = [];
 
         //Array auxiliar para verificar valores gerados em cada questão
@@ -48,12 +54,7 @@ class SubService
             );
 
             //Escrevendo texto para impressão
-            $texto = ($i + 1) . ') ';
-
-            //verificando se a questão gerada já existe
-            $aux = SubService::geraTexto($valores);
-
-            $texto = $texto . $aux;
+            $texto = SubService::geraTexto($valores);
 
             //gerando resultado
             $res = SubService::subtrair($valores);
@@ -97,9 +98,7 @@ class SubService
             );
 
             //Escrevendo texto para impressão
-            $texto = ($i + 1) . ') ';
-            $aux = SubService::geraTexto($valores);
-            $texto = $texto . $aux;
+            $texto = SubService::geraTexto($valores);
 
             //gerando resultado
             $res = SubService::subtrair($valores);
@@ -145,9 +144,7 @@ class SubService
             );
 
             //Escrevendo texto para impressão
-            $texto = ($i + 1) . ') ';
-            $aux = SubService::geraTexto($valores);
-            $texto = $texto . $aux;
+            $texto = SubService::geraTexto($valores);
 
             //gerando resultado
             $res = SubService::subtrair($valores);
