@@ -7,7 +7,8 @@
     <title>Gerador de Questões</title>
     <script type="text/javascript">
         function novaQuestao(){
-            let formItem = document.getElementById("formItem"+getIdIndex());
+            let formItem = document.createElement("div");
+            formItem.id = "formItem"+parseInt(getIdIndex()+1);
 
             let br = document.createElement("br");
 
@@ -74,8 +75,11 @@
 
             let excluir = document.createElement("a");
             excluir.href = "#";
-            excluir.onclick = excluirQuestao(getIdIndex());
             excluir.text = "Excluir Questão";
+            excluir.onclick = function excluindo(event){
+                id = event.path[1].id.split("formItem")[1];
+                excluirQuestao(id);
+            }
 
             formItem.appendChild(p);
             formItem.appendChild(br);
@@ -99,7 +103,12 @@
         function getIdIndex(){
             let container = document.getElementById("formulario");
             let total = container.children.length
-            let ultimo = container.children[total-1].id.split("formItem")[1];
+            if(total === 0){
+                ultimo = 1;
+            }else{
+                let ultimo = container.children[total-1].id.split("formItem")[1];
+            }
+            ultimo = parseInt(ultimo);
             return ultimo;
         }
 
@@ -108,10 +117,11 @@
 <body>
     <h1>Especificações da Avaliação: </h1>
     <br>
+    <button onclick="novaQuestao()">Adicionar Questão</button>
     <form action="{{ route('operations.generate') }}" method="POST" target="_blank">
         @csrf
         <div id="formulario" name="form">
-            <div id="formItem1">
+            {{-- <div id="formItem1">
                 <p>Configurar Questão: </p> <br>
                 <label for="tipo">Tipo de questão:</label>
                 <select name="tipo[]" id="tipo">
@@ -132,11 +142,10 @@
 
                 <a href="#" onclick="excluirQuestao(1)">Excluir Questão</a>
                 <br>
-            </div>
+            </div> --}}
         </div>
 
         <button type="submit">ENVIAR</button>
     </form>
-    <button onclick="novaQuestao()">Adicionar Questão</button>
 </body>
 </html>
