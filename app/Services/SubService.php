@@ -2,8 +2,6 @@
 
 namespace App\Services;
 
-use GuzzleHttp\Psr7\Message;
-
 class SubService
 {
 
@@ -25,12 +23,7 @@ class SubService
     public static function subFacil($quantidade, $data)
     {
         //criando array que armazena string das questões e suas respostas
-        $tipo = 'SubFacil';
-        if(array_key_exists($tipo, $data)){
-            return redirect()->back()
-                ->with('message', 'A operação'.$tipo.'já foi inserida');
-        }
-        $data[$tipo] = [];
+        $data = [];
 
         //Array auxiliar para verificar valores gerados em cada questão
         $gerados = [];
@@ -60,7 +53,7 @@ class SubService
             $res = SubService::subtrair($valores);
 
             //inserindo questão no array
-            array_push($data[$tipo], [
+            array_push($data, [
                 'texto' => $texto,
                 'resposta' => $res
             ]);
@@ -72,8 +65,7 @@ class SubService
     //gerando questões (subtração intermediária, três valores inteiros de 1 a 999)
     public static function subIntermediario($quantidade, $data){
         //criando array que armazena string das questões e suas respostas
-        $tipo = 'SubIntermediario';
-        $data[$tipo] = [];
+        $data = [];
 
         //Array auxiliar para verificar valores gerados em cada questão
         $gerados = [];
@@ -104,7 +96,7 @@ class SubService
             $res = SubService::subtrair($valores);
 
             //inserindo questão no array
-            array_push($data[$tipo], [
+            array_push($data, [
                 'texto' => $texto,
                 'resposta' => $res
             ]);
@@ -116,8 +108,7 @@ class SubService
     //gerando questões (subtração avançada, cinco valores inteiros de 1 a 9999)
     public static function subAvancado($quantidade, $data){
         //criando array que armazena string das questões e suas respostas
-        $tipo = 'SubAvancado';
-        $data[$tipo] = [];
+        $data = [];
 
         //Array auxiliar para verificar valores gerados em cada questão
         $gerados = [];
@@ -150,7 +141,7 @@ class SubService
             $res = SubService::subtrair($valores);
 
             //inserindo questão no array
-            array_push($data[$tipo], [
+            array_push($data, [
                 'texto' => $texto,
                 'resposta' => $res
             ]);

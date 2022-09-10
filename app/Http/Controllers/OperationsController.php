@@ -20,18 +20,24 @@ class OperationsController extends Controller
         $tipo = $request->get('tipo');
         $quantidade = $request->get('quantidade');
         $nivel = $request->get('nivel');
+        $avaliacaoQtd = $request->get('totalAvaliacoes');
 
         $tamanho = count($tipo);
         $data = [];
 
-        for($i=0; $i < $tamanho; $i++){
-            // $data = TestService::teste($tipo, $quantidade, $nivel, $data);
-            if($tipo[$i] == 'Add'){
-                $data = SomaService::selecionaOp($tipo[$i], $nivel[$i], $quantidade[$i], $data);
-            }else if($tipo[$i] == 'Sub'){
-                $data = SubService::selecionaOp($tipo[$i], $nivel[$i], $quantidade[$i], $data);
+        for($j=0;$j < $avaliacaoQtd; $j++){
+            $prova = "Prova ".$j;
+            $data[$prova] = [];
+            for($i=0; $i < $tamanho; $i++){
+                // $data = TestService::teste($tipo, $quantidade, $nivel, $data);
+                if($tipo[$i] == 'Add'){
+                    $data[$prova] += SomaService::selecionaOp($tipo[$i], $nivel[$i], $quantidade[$i], $data[$prova]);
+                }else if($tipo[$i] == 'Sub'){
+                    $data[$prova] += SubService::selecionaOp($tipo[$i], $nivel[$i], $quantidade[$i], $data[$prova]);
+                }
             }
         }
+        dd($data);
 
         $pdf = Pdf::loadView('pdf', compact('data'));
         // $pdf = Pdf::loadHTML($data);

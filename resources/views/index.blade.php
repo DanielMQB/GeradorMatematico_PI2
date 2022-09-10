@@ -13,11 +13,11 @@
             let br = document.createElement("br");
 
             let p = document.createElement("p");
-            let text = document.createTextNode("Configurar Questão: ");
+            let text = document.createTextNode("Configurar Grupo de Questões: ");
             p.appendChild(text);
 
             let labelTipo = document.createElement("label");
-            text = document.createTextNode("Tipo de Questão:");
+            text = document.createTextNode("Tipo de Questões:");
             labelTipo.appendChild(text);
 
             let selectTipo = document.createElement("select");
@@ -120,6 +120,10 @@
     <button onclick="novaQuestao()">Adicionar Questão</button>
     <form action="{{ route('operations.generate') }}" method="POST" target="_blank">
         @csrf
+        <div id="config">
+            <label for="totalAvaliacoes">Quantidade de versões</label>
+            <input type="number" name="totalAvaliacoes" id="totalAvaliacoes">
+        </div>
         <div id="formulario" name="form">
             {{-- <div id="formItem1">
                 <p>Configurar Questão: </p> <br>
