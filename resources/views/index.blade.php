@@ -121,7 +121,7 @@
     <form action="{{ route('operations.generate') }}" method="POST" target="_blank">
         @csrf
         <div id="config">
-            <label for="totalAvaliacoes">Quantidade de versões</label>
+            <label for="totalAvaliacoes">Quantidade de provas: </label>
             <input type="number" name="totalAvaliacoes" id="totalAvaliacoes">
         </div>
         <div id="formulario" name="form">
