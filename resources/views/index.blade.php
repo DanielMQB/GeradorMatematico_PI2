@@ -7,8 +7,6 @@
     <title>Gerador de Questões</title>
     <script type="text/javascript">
         function novaQuestao(){
-            let formItem = document.createElement("div");
-            formItem.id = "formItem"+parseInt(getIdIndex()+1);
 
             let br = document.createElement("br");
 
@@ -81,6 +79,10 @@
                 excluirQuestao(id);
             }
 
+            let formItem = document.createElement("div");
+            console.log(getIdIndex())
+            formItem.id = "formItem"+(parseInt(getIdIndex()));
+
             formItem.appendChild(p);
             formItem.appendChild(br);
             formItem.appendChild(labelTipo);
@@ -101,15 +103,16 @@
         }
 
         function getIdIndex(){
-            let container = document.getElementById("formulario");
+            let container = document.getElementById("formulario")
             let total = container.children.length
+            let ultimo
+
             if(total === 0){
-                ultimo = 1;
+                ultimo = 1
             }else{
-                let ultimo = container.children[total-1].id.split("formItem")[1];
+                ultimo = parseInt(container.children[total-1].id.split("formItem")[1]) + 1
             }
-            ultimo = parseInt(ultimo);
-            return ultimo;
+            return ultimo
         }
 
     </script>
