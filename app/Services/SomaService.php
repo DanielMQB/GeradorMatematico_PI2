@@ -5,27 +5,25 @@ namespace App\Services;
 class SomaService
 {
 
-    public static function selecionaOp($tipo, $nivel, $quantidade,  $data)
+    public static function selecionaOp($tipo, $nivel, $quantidade)
     {
+        $questoes = [];
+
         if ($tipo == "Add" && $nivel == 1) {
-            $data = SomaService::addFacil($quantidade, $data);
-            return $data;
+            $questoes = SomaService::addFacil($quantidade, $questoes);
+            return $questoes;
         }else if ($tipo == "Add" && $nivel == 2) {
-            $data = SomaService::addIntermediario($quantidade, $data);
-            return $data;
+            $questoes = SomaService::addIntermediario($quantidade, $questoes);
+            return $questoes;
         }else if ($tipo == "Add" && $nivel == 3) {
-            $data = SomaService::addAvancado($quantidade, $data);
-            return $data;
+            $questoes = SomaService::addAvancado($quantidade, $questoes);
+            return $questoes;
         }
     }
 
     //gerando questões (soma fácil, dois valores inteiros de 1 a 99)
-    public static function addFacil($quantidade, $data)
+    public static function addFacil($quantidade, $questoes)
     {
-        //criando array que armazena string das questões e suas respostas
-        $tipo = 'AddFacil';
-        $data[$tipo] = [];
-
         //Array auxiliar para verificar valores gerados em cada questão
         $gerados = [];
         //Método de validação manual (criando vetores para números gerados)
@@ -77,20 +75,17 @@ class SomaService
             $res = SomaService::soma($valores);
 
             //inserindo questão no array
-            array_push($data[$tipo], [
+            array_push($questoes, [
                 'texto' => $texto,
                 'resposta' => $res
             ]);
         }
 
-        return $data;
+        return $questoes;
     }
 
     //gerando questões (soma intermediária, três valores inteiros de 1 a 999)
-    public static function addIntermediario($quantidade, $data){
-        //criando array que armazena string das questões e suas respostas
-        $tipo = 'AddIntermediario';
-        $data[$tipo] = [];
+    public static function addIntermediario($quantidade, $questoes){
 
         //Array auxiliar para verificar valores gerados em cada questão
         $gerados = [];
@@ -121,21 +116,17 @@ class SomaService
             $res = SomaService::soma($valores);
 
             //inserindo questão no array
-            array_push($data[$tipo], [
+            array_push($questoes, [
                 'texto' => $texto,
                 'resposta' => $res
             ]);
         }
 
-        return $data;
+        return $questoes;
     }
 
     //gerando questões (soma avançada, cinco valores inteiros de 1 a 9999)
-    public static function addAvancado($quantidade, $data){
-        //criando array que armazena string das questões e suas respostas
-        $tipo = 'AddAvancado';
-        $data[$tipo] = [];
-
+    public static function addAvancado($quantidade, $questoes){
         //Array auxiliar para verificar valores gerados em cada questão
         $gerados = [];
 
@@ -167,13 +158,13 @@ class SomaService
             $res = SomaService::soma($valores);
 
             //inserindo questão no array
-            array_push($data[$tipo], [
+            array_push($questoes, [
                 'texto' => $texto,
                 'resposta' => $res
             ]);
         }
 
-        return $data;
+        return $questoes;
     }
 
     /*

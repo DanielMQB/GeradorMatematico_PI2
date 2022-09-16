@@ -26,18 +26,23 @@ class OperationsController extends Controller
         $data = [];
 
         for($j=0;$j < $avaliacaoQtd; $j++){
-            $prova = "Prova ".$j;
+            $prova = $j;
             $data[$prova] = [];
             for($i=0; $i < $tamanho; $i++){
                 // $data = TestService::teste($tipo, $quantidade, $nivel, $data);
                 if($tipo[$i] == 'Add'){
-                    $data[$prova] += SomaService::selecionaOp($tipo[$i], $nivel[$i], $quantidade[$i], $data[$prova]);
+                    $questoes = SomaService::selecionaOp($tipo[$i], $nivel[$i], $quantidade[$i]);
+                    for($k = 0; $k < $quantidade[$i]; $k++){
+                        array_push($data[$prova], $questoes[$k]);
+                    }
                 }else if($tipo[$i] == 'Sub'){
-                    $data[$prova] += SubService::selecionaOp($tipo[$i], $nivel[$i], $quantidade[$i], $data[$prova]);
+                    $questoes = SubService::selecionaOp($tipo[$i], $nivel[$i], $quantidade[$i]);
+                    for($k = 0; $k < $quantidade[$i]; $k++){
+                        array_push($data[$prova], $questoes[$k]);
+                    }
                 }
             }
         }
-        dd($data);
 
         $pdf = Pdf::loadView('pdf', compact('data'));
         // $pdf = Pdf::loadHTML($data);

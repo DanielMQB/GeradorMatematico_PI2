@@ -6,89 +6,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Teste</title>
+    <style>
+        .page-break{
+            page-break-after: always;
+        }
+    </style>
 </head>
 
 <body>
+    {{-- Impressão de Provas --}}
     <?php
-        $i = 1;
+        $j = 1;
     ?>
-    <!-- Questões de Adição Simples -->
-    @if (array_key_exists('AddFacil', $data))
-        <h2>Questões de Adição ( Nível Fácil )</h2>
-        <hr>
-        @foreach ($data['AddFacil'] as $key => $value)
-            <p>{{ $i++.') '.$value['texto'] }}</p>
-            <p>Resposta: {{ $value['resposta'] }}</p>
-        @endforeach
-        <hr>
-    @endif
-    @if (array_key_exists('AddIntermediario', $data))
-        <h2>Questões de Adição ( Nível Intermediário )</h2>
-        <hr>
-        @foreach ($data['AddIntermediario'] as $key => $value)
-            <p>{{ $i++.') '.$value['texto'] }}</p>
-            <p>Resposta: {{ $value['resposta'] }}</p>
-        @endforeach
-        <hr>
-    @endif
-    @if (array_key_exists('AddAvancado', $data))
-        <h2>Questões de Adição ( Nível Avançado )</h2>
-        <hr>
-        @foreach ($data['AddAvancado'] as $key => $value)
-            <p>{{ $i++.') '.$value['texto'] }}</p>
-            <p>Resposta: {{ $value['resposta'] }}</p>
-        @endforeach
-        <hr>
-    @endif
+    @foreach ($data as $prova )
+        <?php
+            $i = 1;
+        ?>
 
-    <!-- Questões de Subtração Simples -->
-    @if (array_key_exists('SubFacil', $data))
-        <h2>Questões de Subtração ( Nível Fácil )</h2>
         <hr>
-        @foreach ($data['SubFacil'] as $key => $value)
-            <p>{{ $i++.') '.$value['texto'] }}</p>
-            <p>Resposta: {{ $value['resposta'] }}</p>
-        @endforeach
-        <hr>
-    @endif
-    @if (array_key_exists('SubIntermediario', $data))
-        <h2>Questões de Subtração ( Nível Intermediário )</h2>
-        <hr>
-        @foreach ($data['SubIntermediario'] as $key => $value)
-            <p>{{ $i++.') '.$value['texto'] }}</p>
-            <p>Resposta: {{ $value['resposta'] }}</p>
-        @endforeach
-        <hr>
-    @endif
-    @if (array_key_exists('SubAvancado', $data))
-        <h2>Questões de Subtração ( Nível Avançado )</h2>
-        <hr>
-        @foreach ($data['SubAvancado'] as $key => $value)
-            <p>{{ $i++.') '.$value['texto'] }}</p>
-            <p>Resposta: {{ $value['resposta'] }}</p>
-        @endforeach
-        <hr>
-    @endif
+        <h1>Prova {{ $j++}}</h1>
 
-    @if (array_key_exists('Mult', $data))
-        <h2>Questões de Multiplicação</h2>
-        <hr>
-        @foreach ($data['Mult'] as $key => $value)
-            <p>Texto: {{ $i++.') '.$value['texto'] }}</p>
-            <p>Resposta: {{ $value['resposta'] }}</p>
+        @foreach ($prova as $questao)
+            <p>{{ $i++.') '.$questao['texto'] }}</p>
         @endforeach
-        <hr>
-    @endif
 
-    @if (array_key_exists('Div', $data))
-        <h2>Questões de Divisão</h2>
         <hr>
-        @foreach ($data['Div'] as $key => $value)
-            <p>Texto: {{ $i++.') '.$value['texto'] }}</p>
-            <p>Resposta: {{ $value['resposta'] }}</p>
-        @endforeach
+        <div class="page-break"></div>
+    @endforeach
+
+
+    {{-- Impressão de Gabaritos --}}
+    <?php
+        $j = 1;
+        $totalProvas = count($data);
+    ?>
+    @for ($p = 0; $p < $totalProvas; $p++)
+        <?php
+            $i=1;
+        ?>
+
         <hr>
-    @endif
+        <h1>Prova {{ $j++ }} : Gabarito</h1>
+
+        <?php
+            $totalQuestoes = count($data[$totalProvas-1]);
+        ?>
+        @for ($q = 0; $q < $totalProvas; $q++)
+            <p>{{ $i++.') R: '.$data[$p][$q]['resposta'] }}</p>
+        @endfor
+
+        <hr>
+
+        @if ($p != $totalProvas-1)
+            <div class="page-break"></div>
+        @endif
+
+    @endfor
 </body>
 
 </html>

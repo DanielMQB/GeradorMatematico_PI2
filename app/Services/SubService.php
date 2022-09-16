@@ -5,26 +5,26 @@ namespace App\Services;
 class SubService
 {
 
-    public static function selecionaOp($tipo, $nivel, $quantidade,  $data)
+    public static function selecionaOp($tipo, $nivel, $quantidade)
     {
+        $questoes = [];
+
+
         if ($tipo == "Sub" && $nivel == 1) {
-            $data = SubService::subFacil($quantidade, $data);
-            return $data;
+            $questoes = SubService::subFacil($quantidade, $questoes);
+            return $questoes;
         }else if ($tipo == "Sub" && $nivel == 2) {
-            $data = SubService::subIntermediario($quantidade, $data);
-            return $data;
+            $questoes = SubService::subIntermediario($quantidade, $questoes);
+            return $questoes;
         }else if ($tipo == "Sub" && $nivel == 3) {
-            $data = SubService::subAvancado($quantidade, $data);
-            return $data;
+            $questoes = SubService::subAvancado($quantidade, $questoes);
+            return $questoes;
         }
     }
 
     //gerando questões (subtração fácil, dois valores inteiros de 1 a 99)
-    public static function subFacil($quantidade, $data)
+    public static function subFacil($quantidade, $questoes)
     {
-        //criando array que armazena string das questões e suas respostas
-        $data = [];
-
         //Array auxiliar para verificar valores gerados em cada questão
         $gerados = [];
 
@@ -53,20 +53,17 @@ class SubService
             $res = SubService::subtrair($valores);
 
             //inserindo questão no array
-            array_push($data, [
+            array_push($questoes, [
                 'texto' => $texto,
                 'resposta' => $res
             ]);
         }
 
-        return $data;
+        return $questoes;
     }
 
     //gerando questões (subtração intermediária, três valores inteiros de 1 a 999)
-    public static function subIntermediario($quantidade, $data){
-        //criando array que armazena string das questões e suas respostas
-        $data = [];
-
+    public static function subIntermediario($quantidade, $questoes){
         //Array auxiliar para verificar valores gerados em cada questão
         $gerados = [];
 
@@ -96,20 +93,17 @@ class SubService
             $res = SubService::subtrair($valores);
 
             //inserindo questão no array
-            array_push($data, [
+            array_push($questoes, [
                 'texto' => $texto,
                 'resposta' => $res
             ]);
         }
 
-        return $data;
+        return $questoes;
     }
 
     //gerando questões (subtração avançada, cinco valores inteiros de 1 a 9999)
-    public static function subAvancado($quantidade, $data){
-        //criando array que armazena string das questões e suas respostas
-        $data = [];
-
+    public static function subAvancado($quantidade, $questoes){
         //Array auxiliar para verificar valores gerados em cada questão
         $gerados = [];
 
@@ -141,13 +135,13 @@ class SubService
             $res = SubService::subtrair($valores);
 
             //inserindo questão no array
-            array_push($data, [
+            array_push($questoes, [
                 'texto' => $texto,
                 'resposta' => $res
             ]);
         }
 
-        return $data;
+        return $questoes;
     }
 
     /*
@@ -195,4 +189,5 @@ class SubService
         }
         return true;
     }
+
 }
