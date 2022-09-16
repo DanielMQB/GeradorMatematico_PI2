@@ -51,7 +51,7 @@
         <?php
             $totalQuestoes = count($data[$totalProvas-1]);
         ?>
-        @for ($q = 0; $q < $totalProvas; $q++)
+        @for ($q = 0; $q < $totalQuestoes; $q++)
             <p>{{ $i++.') R: '.$data[$p][$q]['resposta'] }}</p>
         @endfor
 
