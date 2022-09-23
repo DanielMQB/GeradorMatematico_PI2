@@ -5,25 +5,26 @@ namespace App\Services;
 class SubService
 {
 
-    public static function selecionaOp($tipo, $nivel, $quantidade)
+    public static function selecionaOp($tipo, $nivel, $quantidade, $peso)
     {
         $questoes = [];
 
+        $pontuacao = ($peso*10)/$quantidade;
 
         if ($tipo == "Sub" && $nivel == 1) {
-            $questoes = SubService::subFacil($quantidade, $questoes);
+            $questoes = SubService::subFacil($quantidade, $questoes, $pontuacao);
             return $questoes;
         }else if ($tipo == "Sub" && $nivel == 2) {
-            $questoes = SubService::subIntermediario($quantidade, $questoes);
+            $questoes = SubService::subIntermediario($quantidade, $questoes, $pontuacao);
             return $questoes;
         }else if ($tipo == "Sub" && $nivel == 3) {
-            $questoes = SubService::subAvancado($quantidade, $questoes);
+            $questoes = SubService::subAvancado($quantidade, $questoes, $pontuacao);
             return $questoes;
         }
     }
 
     //gerando questões (subtração fácil, dois valores inteiros de 1 a 99)
-    public static function subFacil($quantidade, $questoes)
+    public static function subFacil($quantidade, $questoes, $pontuacao)
     {
         //Array auxiliar para verificar valores gerados em cada questão
         $gerados = [];
@@ -55,7 +56,8 @@ class SubService
             //inserindo questão no array
             array_push($questoes, [
                 'texto' => $texto,
-                'resposta' => $res
+                'resposta' => $res,
+                'pontos' => $pontuacao
             ]);
         }
 
@@ -63,7 +65,7 @@ class SubService
     }
 
     //gerando questões (subtração intermediária, três valores inteiros de 1 a 999)
-    public static function subIntermediario($quantidade, $questoes){
+    public static function subIntermediario($quantidade, $questoes, $pontuacao){
         //Array auxiliar para verificar valores gerados em cada questão
         $gerados = [];
 
@@ -95,7 +97,8 @@ class SubService
             //inserindo questão no array
             array_push($questoes, [
                 'texto' => $texto,
-                'resposta' => $res
+                'resposta' => $res,
+                'pontos' => $pontuacao
             ]);
         }
 
@@ -103,7 +106,7 @@ class SubService
     }
 
     //gerando questões (subtração avançada, cinco valores inteiros de 1 a 9999)
-    public static function subAvancado($quantidade, $questoes){
+    public static function subAvancado($quantidade, $questoes, $pontuacao){
         //Array auxiliar para verificar valores gerados em cada questão
         $gerados = [];
 
@@ -137,7 +140,8 @@ class SubService
             //inserindo questão no array
             array_push($questoes, [
                 'texto' => $texto,
-                'resposta' => $res
+                'resposta' => $res,
+                'pontos' => $pontuacao
             ]);
         }
 

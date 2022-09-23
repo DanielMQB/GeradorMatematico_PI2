@@ -6,6 +6,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use App\Services\{
     TestService,
+    PontuacaoService,
     SomaService,
     SubService
 };
@@ -17,8 +18,6 @@ class OperationsController extends Controller
     }
 
     public function generate(Request $request){
-        dd($request->quantidade);
-
         //Dados Gerais
         $totalProvas = $request->get('totalAvaliacoes');
         $nomeInstituto = strtoupper($request->nomeInstituto);
@@ -34,6 +33,8 @@ class OperationsController extends Controller
 
         $tamanho = count($tipo); //Determina o total de grupos de questões adicionados
 
+        $pontuacao = PontuacaoService::calculaPont($peso, $quantidade);
+
         $data = [];
 
         //Inserindo dados gerais de prova
@@ -42,7 +43,8 @@ class OperationsController extends Controller
             "nomeInstituto" => $nomeInstituto,
             "titulo" => $titulo,
             "prefixo" => $prefixo,
-            "professor" => $professor
+            "professor" => $professor,
+            "pontuacao" => $pontuacao
         ];
 
         //Iniciando índice de modelos de prova
@@ -55,12 +57,12 @@ class OperationsController extends Controller
             for($i=0; $i < $tamanho; $i++){
                 // $data = TestService::teste($tipo, $quantidade, $nivel, $data);
                 if($tipo[$i] == 'Add'){
-                    $questoes = SomaService::selecionaOp($tipo[$i], $nivel[$i], $quantidade[$i]);
+                    $questoes = SomaService::selecionaOp($tipo[$i], $nivel[$i], $quantidade[$i], $peso[$i]);
                     for($k = 0; $k < $quantidade[$i]; $k++){
                         array_push($data[$provas][$prova], $questoes[$k]);
                     }
                 }else if($tipo[$i] == 'Sub'){
-                    $questoes = SubService::selecionaOp($tipo[$i], $nivel[$i], $quantidade[$i]);
+                    $questoes = SubService::selecionaOp($tipo[$i], $nivel[$i], $quantidade[$i], $peso[$i]);
                     for($k = 0; $k < $quantidade[$i]; $k++){
                         array_push($data[$provas][$prova], $questoes[$k]);
                     }
@@ -68,7 +70,7 @@ class OperationsController extends Controller
             }
         }
 
-        // dd(count($data["Provas"]));
+        // dd($data);
 
         $pdf = Pdf::loadView('pdf', compact('data'));
         // $pdf = Pdf::loadHTML($data);

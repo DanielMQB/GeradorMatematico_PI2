@@ -28,9 +28,10 @@
         <h3>{{ $data["Dados"]["titulo"]}} -- {{$data["Dados"]["prefixo"]}}{{$p++}}</h3>
         <h3>Professor: {{ $data["Dados"]["professor"] }}</h3>
         <p>Nome do Aluno: ________________ Número:___</p>
+        <p>_______ Pontos de {{ $data["Dados"]["pontuacao"]}}</p>
 
         @foreach ($prova as $questao)
-            <p>{{ $i++.') '.$questao['texto'] }}</p>
+            <p>{{ $i++.') ('.$questao['pontos'].' Pontos )   '.$questao['texto'] }}</p>
         @endforeach
 
         <hr>
@@ -56,7 +57,7 @@
             $totalQuestoes = count($data["Provas"][$totalProvas-1]);
         ?>
         @for ($q = 0; $q < $totalQuestoes; $q++)
-            <p>{{ $i++.') R: '.$data["Provas"][$p][$q]['resposta'] }}</p>
+            <p>{{ 'Questão '.$i++.' - ( '.$questao['pontos'].' Pontos ) R: '.$data["Provas"][$p][$q]['resposta'] }}</p>
         @endfor
 
         <hr>

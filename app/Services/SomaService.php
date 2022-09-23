@@ -5,24 +5,26 @@ namespace App\Services;
 class SomaService
 {
 
-    public static function selecionaOp($tipo, $nivel, $quantidade)
+    public static function selecionaOp($tipo, $nivel, $quantidade, $peso)
     {
         $questoes = [];
 
+        $pontuacao = ($peso*10)/$quantidade;
+
         if ($tipo == "Add" && $nivel == 1) {
-            $questoes = SomaService::addFacil($quantidade, $questoes);
+            $questoes = SomaService::addFacil($quantidade, $questoes, $pontuacao);
             return $questoes;
         }else if ($tipo == "Add" && $nivel == 2) {
-            $questoes = SomaService::addIntermediario($quantidade, $questoes);
+            $questoes = SomaService::addIntermediario($quantidade, $questoes, $pontuacao);
             return $questoes;
         }else if ($tipo == "Add" && $nivel == 3) {
-            $questoes = SomaService::addAvancado($quantidade, $questoes);
+            $questoes = SomaService::addAvancado($quantidade, $questoes, $pontuacao);
             return $questoes;
         }
     }
 
     //gerando questões (soma fácil, dois valores inteiros de 1 a 99)
-    public static function addFacil($quantidade, $questoes)
+    public static function addFacil($quantidade, $questoes, $pontuacao)
     {
         //Array auxiliar para verificar valores gerados em cada questão
         $gerados = [];
@@ -77,7 +79,9 @@ class SomaService
             //inserindo questão no array
             array_push($questoes, [
                 'texto' => $texto,
-                'resposta' => $res
+                'resposta' => $res,
+                'pontos' => $pontuacao,
+                'pontos' => $pontuacao
             ]);
         }
 
@@ -85,7 +89,7 @@ class SomaService
     }
 
     //gerando questões (soma intermediária, três valores inteiros de 1 a 999)
-    public static function addIntermediario($quantidade, $questoes){
+    public static function addIntermediario($quantidade, $questoes, $pontuacao){
 
         //Array auxiliar para verificar valores gerados em cada questão
         $gerados = [];
@@ -118,7 +122,8 @@ class SomaService
             //inserindo questão no array
             array_push($questoes, [
                 'texto' => $texto,
-                'resposta' => $res
+                'resposta' => $res,
+                'pontos' => $pontuacao
             ]);
         }
 
@@ -126,7 +131,7 @@ class SomaService
     }
 
     //gerando questões (soma avançada, cinco valores inteiros de 1 a 9999)
-    public static function addAvancado($quantidade, $questoes){
+    public static function addAvancado($quantidade, $questoes, $pontuacao){
         //Array auxiliar para verificar valores gerados em cada questão
         $gerados = [];
 
@@ -160,7 +165,8 @@ class SomaService
             //inserindo questão no array
             array_push($questoes, [
                 'texto' => $texto,
-                'resposta' => $res
+                'resposta' => $res,
+                'pontos' => $pontuacao
             ]);
         }
 
