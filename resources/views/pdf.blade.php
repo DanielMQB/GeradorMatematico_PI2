@@ -50,7 +50,7 @@
             ?>
 
 <hr>
-<h1>Prova {{ $j++ }} : Gabarito</h1>
+<h1>{{$data["Dados"]["prefixo"]}}{{$j++}} : Gabarito</h1>
 
 <?php
             $totalQuestoes = count($data["Provas"][$totalProvas-1]);
