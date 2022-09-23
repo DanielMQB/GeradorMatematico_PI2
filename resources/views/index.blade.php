@@ -118,41 +118,46 @@
     </script>
 </head>
 <body>
-    <h1>Especificações da Avaliação: </h1>
+    <h1>Detalhes da Avaliação: </h1>
     <br>
-    <button onclick="novaQuestao()">Adicionar Questão</button>
     <form action="{{ route('operations.generate') }}" method="POST" target="_blank">
+
         @csrf
+
         <div id="config">
-            <label for="totalAvaliacoes">Quantidade de provas: </label>
-            <input type="number" name="totalAvaliacoes" id="totalAvaliacoes">
+
+            <div id="total">
+                <label for="totalAvaliacoes">Quantidade de provas: </label>
+                <input type="number" name="totalAvaliacoes" id="totalAvaliacoes">
+            </div>
+
+            <div id="escola">
+                <label for="nomeInstituto">Nome da Instituição: </label>
+                <input type="text" name="nomeInstituto" id="nomeInstituto">
+            </div>
+
+            <div id="titulo">
+                <label for="tituloProva"> Título da Avaliação: </label>
+                <input type="text" name="tituloProva" id="tituloProva">
+            </div>
+
+            <div id="prefixo">
+                <label for="prefixoProva"> Prefixo (Identificação) da Avaliação: </label>
+                <input type="text" name="prefixoProva" id="prefixoProva">
+            </div>
+
+            <div id="professor">
+                <label for="nomeProfessor"> Nome do Professor: </label>
+                <input type="text" name="nomeProfessor" id="nomeProfessor">
+            </div>
+
+
         </div>
-        <div id="formulario" name="form">
-            {{-- <div id="formItem1">
-                <p>Configurar Questão: </p> <br>
-                <label for="tipo">Tipo de questão:</label>
-                <select name="tipo[]" id="tipo">
-                    <option value="Add">Adição</option>
-                    <option value="Sub">Subtração</option>
-                    <option value="Mult">Multiplicação</option>
-                    <option value="Div">Divisão</option>
-                </select>
 
-                <label for="quantidade">Quantidade de questões</label>
-                <input type="int" name="quantidade[]" id="quantidade" placeholder="Num. de questões">
-
-                <select name="nivel[]" id="nivel">
-                    <option value="1">Fácil</option>
-                    <option value="2">Intermediário</option>
-                    <option value="3">Avançado</option>
-                </select>
-
-                <a href="#" onclick="excluirQuestao(1)">Excluir Questão</a>
-                <br>
-            </div> --}}
-        </div>
+        <div id="formulario" name="form"></div>
 
         <button type="submit">ENVIAR</button>
     </form>
+    <button onclick="novaQuestao()">Adicionar Questão</button>
 </body>
 </html>

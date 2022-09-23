@@ -16,15 +16,18 @@
 <body>
     {{-- Impressão de Provas --}}
     <?php
-        $j = 1;
+        $p = 1;
+
     ?>
-    @foreach ($data as $prova )
+    @foreach ($data["Provas"] as $prova )
         <?php
             $i = 1;
         ?>
 
-        <hr>
-        <h1>Prova {{ $j++}}</h1>
+        <h4>{{ $data["Dados"]["nomeInstituto"]}}</h4>
+        <h3>{{ $data["Dados"]["titulo"]}} -- {{$data["Dados"]["prefixo"]}}{{$p++}}</h3>
+        <h3>Professor: {{ $data["Dados"]["professor"] }}</h3>
+        <p>Nome do Aluno: ________________ Número:___</p>
 
         @foreach ($prova as $questao)
             <p>{{ $i++.') '.$questao['texto'] }}</p>
@@ -38,21 +41,22 @@
     {{-- Impressão de Gabaritos --}}
     <?php
         $j = 1;
-        $totalProvas = count($data);
-    ?>
-    @for ($p = 0; $p < $totalProvas; $p++)
-        <?php
-            $i=1;
+        $totalProvas = count($data["Provas"]);
+
         ?>
+    @for ($p = 0; $p < $totalProvas; $p++)
+    <?php
+            $i=1;
+            ?>
 
-        <hr>
-        <h1>Prova {{ $j++ }} : Gabarito</h1>
+<hr>
+<h1>Prova {{ $j++ }} : Gabarito</h1>
 
-        <?php
-            $totalQuestoes = count($data[$totalProvas-1]);
+<?php
+            $totalQuestoes = count($data["Provas"][$totalProvas-1]);
         ?>
         @for ($q = 0; $q < $totalQuestoes; $q++)
-            <p>{{ $i++.') R: '.$data[$p][$q]['resposta'] }}</p>
+            <p>{{ $i++.') R: '.$data["Provas"][$p][$q]['resposta'] }}</p>
         @endfor
 
         <hr>
