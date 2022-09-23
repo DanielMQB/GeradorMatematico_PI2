@@ -8,6 +8,10 @@
     <script type="text/javascript">
         function novaQuestao(){
 
+            let formItem = document.createElement("div");
+            console.log(getIdIndex())
+            formItem.id = "formItem"+(parseInt(getIdIndex()));
+
             let br = document.createElement("br");
 
             let p = document.createElement("p");
@@ -71,6 +75,31 @@
             option.text =  "Avançado";
             selectNivel.appendChild(option);
 
+            // <input type="range" value="24" min="1" max="100" oninput="this.nextElementSibling.value = this.value">
+            //<output>24</output>
+            let labelPeso = document.createElement("label");
+            text = document.createTextNode("Peso: ");
+            labelPeso.appendChild(text);
+
+            let peso = document.createElement("input");
+            peso.name = "peso[]";
+            peso.type = "range";
+            peso.min = 1;
+            peso.max = 10;
+            peso.value = 1;
+            peso.step = 0.5;
+            peso.oninput = function mostrarPeso(event){
+                valor = document.getElementById("peso_" + formItem.id);
+                valor.innerText = peso.value;
+                console.log(valor);
+            }
+
+            let valorPeso = document.createElement("span");
+            text = document.createTextNode("1");;
+            valorPeso.appendChild(text);
+            valorPeso.id = "peso_" + formItem.id
+
+
             let excluir = document.createElement("a");
             excluir.href = "#";
             excluir.text = "Excluir Questão";
@@ -79,10 +108,6 @@
                 excluirQuestao(id);
             }
 
-            let formItem = document.createElement("div");
-            console.log(getIdIndex())
-            formItem.id = "formItem"+(parseInt(getIdIndex()));
-
             formItem.appendChild(p);
             formItem.appendChild(br);
             formItem.appendChild(labelTipo);
@@ -90,6 +115,9 @@
             formItem.appendChild(labelQtd);
             formItem.appendChild(inputQtd);
             formItem.appendChild(selectNivel);
+            formItem.appendChild(labelPeso);
+            formItem.appendChild(peso);
+            formItem.appendChild(valorPeso);
             formItem.appendChild(excluir);
             formItem.appendChild(br);
 

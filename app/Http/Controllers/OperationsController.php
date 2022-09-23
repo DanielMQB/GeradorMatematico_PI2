@@ -17,6 +17,8 @@ class OperationsController extends Controller
     }
 
     public function generate(Request $request){
+        dd($request->quantidade);
+
         //Dados Gerais
         $totalProvas = $request->get('totalAvaliacoes');
         $nomeInstituto = strtoupper($request->nomeInstituto);
@@ -27,6 +29,7 @@ class OperationsController extends Controller
         //Informações de Questão
         $tipo = $request->get('tipo');
         $quantidade = $request->get('quantidade');
+        $peso = $request->get('peso');
         $nivel = $request->get('nivel');
 
         $tamanho = count($tipo); //Determina o total de grupos de questões adicionados
