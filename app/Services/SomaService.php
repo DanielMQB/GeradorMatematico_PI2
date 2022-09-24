@@ -9,15 +9,15 @@ class SomaService
     {
         $questoes = [];
 
-        $pontuacao = ($peso*10)/$quantidade;
+        $pontuacao = ($peso * 10) / $quantidade;
 
         if ($tipo == "Add" && $nivel == 1) {
             $questoes = SomaService::addFacil($quantidade, $questoes, $pontuacao);
             return $questoes;
-        }else if ($tipo == "Add" && $nivel == 2) {
+        } else if ($tipo == "Add" && $nivel == 2) {
             $questoes = SomaService::addIntermediario($quantidade, $questoes, $pontuacao);
             return $questoes;
-        }else if ($tipo == "Add" && $nivel == 3) {
+        } else if ($tipo == "Add" && $nivel == 3) {
             $questoes = SomaService::addAvancado($quantidade, $questoes, $pontuacao);
             return $questoes;
         }
@@ -38,7 +38,7 @@ class SomaService
             $gerados[$i] = [];
             $valida = false;
 
-            while(!$valida){
+            while (!$valida) {
                 $valores[0] = rand(1, 99);
                 $valores[1] = rand(1, 99);
 
@@ -55,7 +55,8 @@ class SomaService
             }
 
             //Armazenando valores gerados em vetor auxiliar
-            array_push($gerados[$i],
+            array_push(
+                $gerados[$i],
                 $valores[0],
                 $valores[1]
             );
@@ -89,7 +90,8 @@ class SomaService
     }
 
     //gerando questões (soma intermediária, três valores inteiros de 1 a 999)
-    public static function addIntermediario($quantidade, $questoes, $pontuacao){
+    public static function addIntermediario($quantidade, $questoes, $pontuacao)
+    {
 
         //Array auxiliar para verificar valores gerados em cada questão
         $gerados = [];
@@ -99,7 +101,7 @@ class SomaService
             $gerados[$i] = [];
             $valida = false;
 
-            while(!$valida){
+            while (!$valida) {
                 $valores[0] = rand(1, 999);
                 $valores[1] = rand(1, 999);
                 $valores[2] = rand(1, 999);
@@ -107,7 +109,8 @@ class SomaService
                 $valida = SomaService::validaValores($gerados, $valores);
             }
 
-            array_push($gerados[$i],
+            array_push(
+                $gerados[$i],
                 $valores[0],
                 $valores[1],
                 $valores[2]
@@ -131,7 +134,8 @@ class SomaService
     }
 
     //gerando questões (soma avançada, cinco valores inteiros de 1 a 9999)
-    public static function addAvancado($quantidade, $questoes, $pontuacao){
+    public static function addAvancado($quantidade, $questoes, $pontuacao)
+    {
         //Array auxiliar para verificar valores gerados em cada questão
         $gerados = [];
 
@@ -140,7 +144,7 @@ class SomaService
             $gerados[$i] = [];
             $valida = false;
 
-            while(!$valida){
+            while (!$valida) {
                 $valores[0] = rand(1, 9999);
                 $valores[1] = rand(1, 9999);
                 $valores[2] = rand(1, 9999);
@@ -150,7 +154,8 @@ class SomaService
                 $valida = SomaService::validaValores($gerados, $valores);
             }
 
-            array_push($gerados[$i],
+            array_push(
+                $gerados[$i],
                 $valores[0],
                 $valores[1],
                 $valores[2]
@@ -180,7 +185,7 @@ class SomaService
     {
         $soma = 0;
 
-        for($i=0; $i < count($valores); $i++){
+        for ($i = 0; $i < count($valores); $i++) {
             $soma += $valores[$i];
         }
 
@@ -208,11 +213,12 @@ class SomaService
     Separa os números gerados para cada questão em vetores,
     ordena esses vetores e os compara
     */
-    public static function validaValores($gerados,$valores){
-        foreach($gerados as $aux){
+    public static function validaValores($gerados, $valores)
+    {
+        foreach ($gerados as $aux) {
             sort($aux);
             sort($valores);
-            if($aux == $valores){
+            if ($aux == $valores) {
                 return false;
             }
         }

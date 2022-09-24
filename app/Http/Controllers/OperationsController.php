@@ -13,11 +13,13 @@ use App\Services\{
 
 class OperationsController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('index');
     }
 
-    public function generate(Request $request){
+    public function generate(Request $request)
+    {
         //Dados Gerais
         $totalProvas = $request->get('totalAvaliacoes');
         $nomeInstituto = strtoupper($request->nomeInstituto);
@@ -51,19 +53,19 @@ class OperationsController extends Controller
         $provas = "Provas";
         $data[$provas] = [];
 
-        for($j=0;$j < $totalProvas; $j++){
+        for ($j = 0; $j < $totalProvas; $j++) {
             $prova = $j;
             $data[$provas][$prova] = [];
-            for($i=0; $i < $tamanho; $i++){
+            for ($i = 0; $i < $tamanho; $i++) {
                 // $data = TestService::teste($tipo, $quantidade, $nivel, $data);
-                if($tipo[$i] == 'Add'){
+                if ($tipo[$i] == 'Add') {
                     $questoes = SomaService::selecionaOp($tipo[$i], $nivel[$i], $quantidade[$i], $peso[$i]);
-                    for($k = 0; $k < $quantidade[$i]; $k++){
+                    for ($k = 0; $k < $quantidade[$i]; $k++) {
                         array_push($data[$provas][$prova], $questoes[$k]);
                     }
-                }else if($tipo[$i] == 'Sub'){
+                } else if ($tipo[$i] == 'Sub') {
                     $questoes = SubService::selecionaOp($tipo[$i], $nivel[$i], $quantidade[$i], $peso[$i]);
-                    for($k = 0; $k < $quantidade[$i]; $k++){
+                    for ($k = 0; $k < $quantidade[$i]; $k++) {
                         array_push($data[$provas][$prova], $questoes[$k]);
                     }
                 }

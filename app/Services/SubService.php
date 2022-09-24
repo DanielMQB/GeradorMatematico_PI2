@@ -9,15 +9,15 @@ class SubService
     {
         $questoes = [];
 
-        $pontuacao = ($peso*10)/$quantidade;
+        $pontuacao = ($peso * 10) / $quantidade;
 
         if ($tipo == "Sub" && $nivel == 1) {
             $questoes = SubService::subFacil($quantidade, $questoes, $pontuacao);
             return $questoes;
-        }else if ($tipo == "Sub" && $nivel == 2) {
+        } else if ($tipo == "Sub" && $nivel == 2) {
             $questoes = SubService::subIntermediario($quantidade, $questoes, $pontuacao);
             return $questoes;
-        }else if ($tipo == "Sub" && $nivel == 3) {
+        } else if ($tipo == "Sub" && $nivel == 3) {
             $questoes = SubService::subAvancado($quantidade, $questoes, $pontuacao);
             return $questoes;
         }
@@ -34,7 +34,7 @@ class SubService
             $gerados[$i] = [];
             $valida = false;
 
-            while(!$valida){
+            while (!$valida) {
                 $valores[0] = rand(1, 99);
                 $valores[1] = rand(1, 99);
 
@@ -42,7 +42,8 @@ class SubService
             }
 
             //Armazenando valores gerados em vetor auxiliar
-            array_push($gerados[$i],
+            array_push(
+                $gerados[$i],
                 $valores[0],
                 $valores[1]
             );
@@ -65,7 +66,8 @@ class SubService
     }
 
     //gerando questões (subtração intermediária, três valores inteiros de 1 a 999)
-    public static function subIntermediario($quantidade, $questoes, $pontuacao){
+    public static function subIntermediario($quantidade, $questoes, $pontuacao)
+    {
         //Array auxiliar para verificar valores gerados em cada questão
         $gerados = [];
 
@@ -74,7 +76,7 @@ class SubService
             $gerados[$i] = [];
             $valida = false;
 
-            while(!$valida){
+            while (!$valida) {
                 $valores[0] = rand(1, 999);
                 $valores[1] = rand(1, 999);
                 $valores[2] = rand(1, 999);
@@ -82,7 +84,8 @@ class SubService
                 $valida = SubService::validaValores($gerados, $valores);
             }
 
-            array_push($gerados[$i],
+            array_push(
+                $gerados[$i],
                 $valores[0],
                 $valores[1],
                 $valores[2]
@@ -106,7 +109,8 @@ class SubService
     }
 
     //gerando questões (subtração avançada, cinco valores inteiros de 1 a 9999)
-    public static function subAvancado($quantidade, $questoes, $pontuacao){
+    public static function subAvancado($quantidade, $questoes, $pontuacao)
+    {
         //Array auxiliar para verificar valores gerados em cada questão
         $gerados = [];
 
@@ -115,7 +119,7 @@ class SubService
             $gerados[$i] = [];
             $valida = false;
 
-            while(!$valida){
+            while (!$valida) {
                 $valores[0] = rand(1, 9999);
                 $valores[1] = rand(1, 9999);
                 $valores[2] = rand(1, 9999);
@@ -125,7 +129,8 @@ class SubService
                 $valida = SubService::validaValores($gerados, $valores);
             }
 
-            array_push($gerados[$i],
+            array_push(
+                $gerados[$i],
                 $valores[0],
                 $valores[1],
                 $valores[2]
@@ -155,7 +160,7 @@ class SubService
     {
         $subtracao = $valores[0];
 
-        for($i=1; $i < count($valores); $i++){
+        for ($i = 1; $i < count($valores); $i++) {
             $subtracao -= $valores[$i];
         }
 
@@ -183,15 +188,15 @@ class SubService
     Separa os números gerados para cada questão em vetores,
     ordena esses vetores e os compara
     */
-    public static function validaValores($gerados,$valores){
-        foreach($gerados as $aux){
+    public static function validaValores($gerados, $valores)
+    {
+        foreach ($gerados as $aux) {
             sort($aux);
             sort($valores);
-            if($aux == $valores){
+            if ($aux == $valores) {
                 return false;
             }
         }
         return true;
     }
-
 }

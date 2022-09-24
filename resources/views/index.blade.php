@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Gerador de Questões</title>
     <script type="text/javascript">
-        function novaQuestao(){
+        function novaQuestao() {
 
             let formItem = document.createElement("div");
             console.log(getIdIndex())
-            formItem.id = "formItem"+(parseInt(getIdIndex()));
+            formItem.id = "formItem" + (parseInt(getIdIndex()));
 
             let br = document.createElement("br");
 
@@ -28,22 +29,22 @@
 
             let option = document.createElement("option");
             option.value = "Add";
-            option.text =  "Adição";
+            option.text = "Adição";
             selectTipo.appendChild(option);
 
             option = document.createElement("option");
             option.value = "Sub";
-            option.text =  "Subtração";
+            option.text = "Subtração";
             selectTipo.appendChild(option);
 
             option = document.createElement("option");
             option.value = "Mult";
-            option.text =  "Multiplicação";
+            option.text = "Multiplicação";
             selectTipo.appendChild(option);
 
             option = document.createElement("option");
             option.value = "Div";
-            option.text =  "Divisão";
+            option.text = "Divisão";
             selectTipo.appendChild(option);
 
             let labelQtd = document.createElement("label");
@@ -62,17 +63,17 @@
 
             option = document.createElement("option");
             option.value = "1";
-            option.text =  "Fácil";
+            option.text = "Fácil";
             selectNivel.appendChild(option);
 
             option = document.createElement("option");
             option.value = "2";
-            option.text =  "Intermediário";
+            option.text = "Intermediário";
             selectNivel.appendChild(option);
 
             option = document.createElement("option");
             option.value = "3";
-            option.text =  "Avançado";
+            option.text = "Avançado";
             selectNivel.appendChild(option);
 
             // <input type="range" value="24" min="1" max="100" oninput="this.nextElementSibling.value = this.value">
@@ -88,7 +89,7 @@
             peso.max = 10;
             peso.value = 1;
             peso.step = 0.5;
-            peso.oninput = function mostrarPeso(event){
+            peso.oninput = function mostrarPeso(event) {
                 valor = document.getElementById("peso_" + formItem.id);
                 valor.innerText = peso.value;
                 console.log(valor);
@@ -103,7 +104,7 @@
             let excluir = document.createElement("a");
             excluir.href = "#";
             excluir.text = "Excluir Questão";
-            excluir.onclick = function excluindo(event){
+            excluir.onclick = function excluindo(event) {
                 id = event.path[1].id.split("formItem")[1];
                 excluirQuestao(id);
             }
@@ -125,26 +126,26 @@
             form.appendChild(formItem);
         }
 
-        function excluirQuestao(num){
-            let elemento = document.getElementById("formItem"+num);
+        function excluirQuestao(num) {
+            let elemento = document.getElementById("formItem" + num);
             elemento.remove();
         }
 
-        function getIdIndex(){
+        function getIdIndex() {
             let container = document.getElementById("formulario")
             let total = container.children.length
             let ultimo
 
-            if(total === 0){
+            if (total === 0) {
                 ultimo = 1
-            }else{
-                ultimo = parseInt(container.children[total-1].id.split("formItem")[1]) + 1
+            } else {
+                ultimo = parseInt(container.children[total - 1].id.split("formItem")[1]) + 1
             }
             return ultimo
         }
-
     </script>
 </head>
+
 <body>
     <h1>Detalhes da Avaliação: </h1>
     <br>
@@ -188,4 +189,5 @@
     </form>
     <button onclick="novaQuestao()">Adicionar Questão</button>
 </body>
+
 </html>
