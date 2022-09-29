@@ -79,7 +79,7 @@
             // <input type="range" value="24" min="1" max="100" oninput="this.nextElementSibling.value = this.value">
             //<output>24</output>
             let labelPeso = document.createElement("label");
-            text = document.createTextNode("Peso: ");
+            text = document.createTextNode("Pontos (por questão): ");
             labelPeso.appendChild(text);
 
             let peso = document.createElement("input");

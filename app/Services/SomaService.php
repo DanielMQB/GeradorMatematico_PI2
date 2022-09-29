@@ -5,11 +5,11 @@ namespace App\Services;
 class SomaService
 {
 
-    public static function selecionaOp($tipo, $nivel, $quantidade, $peso)
+    public static function selecionaOp($tipo, $nivel, $quantidade, $pontos)
     {
         $questoes = [];
 
-        $pontuacao = ($peso * 10) / $quantidade;
+        $pontuacao = round($pontos / $quantidade, 1);
 
         if ($tipo == "Add" && $nivel == 1) {
             $questoes = SomaService::addFacil($quantidade, $questoes, $pontuacao);
