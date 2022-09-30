@@ -4,10 +4,10 @@ namespace App\Services;
 
 class PontuacaoService
 {
-    public static function calculaPont($peso){
+    public static function calculaPont($peso, $quantidade){
         $pontuacao = 0;
         for($i = 0; $i < count($peso); $i++){
-            $pontuacao += $peso[$i]*10;
+            $pontuacao += $peso[$i]*$quantidade[$i];
         }
         return $pontuacao;
     }

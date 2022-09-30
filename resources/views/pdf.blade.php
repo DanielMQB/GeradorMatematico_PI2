@@ -7,11 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Teste</title>
     <style>
-        @page{
+        @page {
             margin: 30px;
         }
 
-        body{
+        body {
             width: 100%;
             height: 100%;
             align-content: center;
@@ -21,14 +21,33 @@
             page-break-after: always;
         }
 
-        .resposta{
+        .resposta {
             margin: 5px 0px 20px 0px;
             width: 100%;
             height: 100px;
             border: 1px solid black;
         }
 
-        .tabela{
+        .gabarito{
+            background-color: #999;
+            width: 220px;
+            align-content: center;
+            display: inline-block;
+        }
+
+        .tituloGabarito{
+            background-color: #194;
+            width: 100%;
+            height: 40px;
+        }
+
+        .colGabarito{
+            background-color: #931;
+            width: 33%;
+            float: left;
+        }
+
+        .tabela {
             width: 26%;
             display: inline-block;
             margin-top: 70px;
@@ -64,11 +83,14 @@
         <h3>{{ $data['Dados']['titulo'] }} -- {{ $data['Dados']['prefixo'] }}{{ $p++ }}</h3>
         <h3>Professor: {{ $data['Dados']['professor'] }}</h3>
         <p>Nome do Aluno: ________________ Número:___</p>
-        <p>_______ Pontos de {{ $data['Dados']['pontuacao'] }}</p>
 
         @foreach ($prova as $questao)
-            <p>{{ $i++ . ') (' . $questao['pontos'] . ' Pontos )   ' . $questao['texto'] }}</p>
-            <div class="resposta"></div>
+            <div>
+                <span>
+                    <p>{{ $i++ . ') (' . $questao['pontos'] . ' Pontos )   ' . $questao['texto'] }}</p>
+                    <div class="resposta"></div>
+                </span>
+            </div>
         @endforeach
 
         <hr>
@@ -83,10 +105,29 @@
 
     ?>
     @for ($p = 0; $p < $totalProvas; $p++)
-        <div class = "tabela">
+        <div class="gabarito">
+            {{-- Título --}}
+            <div class="tituloGabarito">
+                <p>Gabarito: {{ $data['Dados']['prefixo'] . $p + 1 }} ({{ $data['Dados']['pontuacao'] }} Pontos)</p>
+            </div>
+            {{-- Cabeçalho --}}
+            <div class="colGabarito">
+                <p>Questão</p>
+            </div>
+            <div class="colGabarito">
+                <p>Pontos</p>
+            </div>
+            <div class="colGabarito">
+                <p>Resposta</p>
+            </div>
+            {{-- Questões --}}
+        </div>
+
+        <div class="tabela">
             <table>
                 <tr>
-                    <th colspan=3>Gabarito: {{ $data['Dados']['prefixo'] . $p + 1 }}</th>
+                    <th colspan=3>Gabarito: {{ $data['Dados']['prefixo'] . $p + 1 }} ({{ $data['Dados']['pontuacao'] }}
+                        Pontos)</th>
                 </tr>
                 <tr>
                     <th>Questão</th>

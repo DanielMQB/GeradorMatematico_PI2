@@ -9,7 +9,7 @@ class SomaService
     {
         $questoes = [];
 
-        $pontuacao = round($pontos / $quantidade, 1);
+        $pontuacao = $pontos;
 
         if ($tipo == "Add" && $nivel == 1) {
             $questoes = SomaService::addFacil($quantidade, $questoes, $pontuacao);
