@@ -28,25 +28,6 @@
             border: 1px solid black;
         }
 
-        .gabarito{
-            background-color: #999;
-            width: 220px;
-            align-content: center;
-            display: inline-block;
-        }
-
-        .tituloGabarito{
-            background-color: #194;
-            width: 100%;
-            height: 40px;
-        }
-
-        .colGabarito{
-            background-color: #931;
-            width: 33%;
-            float: left;
-        }
-
         .tabela {
             width: 26%;
             display: inline-block;
@@ -105,24 +86,6 @@
 
     ?>
     @for ($p = 0; $p < $totalProvas; $p++)
-        <div class="gabarito">
-            {{-- Título --}}
-            <div class="tituloGabarito">
-                <p>Gabarito: {{ $data['Dados']['prefixo'] . $p + 1 }} ({{ $data['Dados']['pontuacao'] }} Pontos)</p>
-            </div>
-            {{-- Cabeçalho --}}
-            <div class="colGabarito">
-                <p>Questão</p>
-            </div>
-            <div class="colGabarito">
-                <p>Pontos</p>
-            </div>
-            <div class="colGabarito">
-                <p>Resposta</p>
-            </div>
-            {{-- Questões --}}
-        </div>
-
         <div class="tabela">
             <table>
                 <tr>
