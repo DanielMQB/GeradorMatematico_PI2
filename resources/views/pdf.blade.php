@@ -28,8 +28,20 @@
             border: 1px solid black;
         }
 
+        .column {
+            width: 50%;
+            float:left;
+            display: inline-block;
+            margin: auto;
+        } 
+        .columns {
+            Width: 100%;
+            content: "";
+            display: table;
+            clear: both;
+        }
         .tabela {
-            width: 26%;
+            width: 100%;
             display: inline-block;
             margin-top: 70px;
             margin-left: 37px;
@@ -86,6 +98,8 @@
 
     ?>
     @for ($p = 0; $p < $totalProvas; $p++)
+    <div class="columns">
+        <div class="column">
         <div class="tabela">
             <table>
                 <tr>
@@ -109,6 +123,33 @@
                 @endfor
             </table>
         </div>
+        </div>
+        <div class="column">
+        <div class="tabela">
+            <table>
+                <tr>
+                    <th colspan=3>Gabarito: {{ $data['Dados']['prefixo'] . $p + 1 }} ({{ $data['Dados']['pontuacao'] }}
+                        Pontos)</th>
+                </tr>
+                <tr>
+                    <th>Questão</th>
+                    <th>Pontos</th>
+                    <th>Resposta</th>
+                </tr>
+                <?php
+                $totalQuestoes = count($data['Provas'][$totalProvas - 1]);
+                ?>
+                @for ($q = 0; $q < $totalQuestoes; $q++)
+                    <tr>
+                        <td>{{ $q + 1 }}</td>
+                        <td>{{ $data['Provas'][$p][$q]['pontos'] }}</td>
+                        <td>{{ $data['Provas'][$p][$q]['resposta'] }}</td>
+                    </tr>
+                @endfor
+            </table>
+        </div>
+        </div>
+    </div>
         {{-- @if ($p != $totalProvas - 1)
             <div class="page-break"></div>
         @endif --}}
