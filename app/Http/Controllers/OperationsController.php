@@ -27,6 +27,12 @@ class OperationsController extends Controller
         $prefixo = strtoupper($request->prefixoProva);
         $professor = ucwords(strtolower($request->nomeProfessor));
 
+        if(!$request->showGabarito){
+            $gabarito = 0;
+        }else{
+            $gabarito = 1;
+        }
+
         //Informações de Questão
         $tipo = $request->get('tipo');
         $quantidade = $request->get('quantidade');
@@ -47,7 +53,8 @@ class OperationsController extends Controller
             "titulo" => $titulo,
             "prefixo" => $prefixo,
             "professor" => $professor,
-            "pontuacao" => $pontuacao
+            "pontuacao" => $pontuacao,
+            "gabarito" => $gabarito
         ];
 
         //Iniciando índice de modelos de prova

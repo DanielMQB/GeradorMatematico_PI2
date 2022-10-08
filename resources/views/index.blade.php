@@ -76,8 +76,6 @@
             option.text = "Avançado";
             selectNivel.appendChild(option);
 
-            // <input type="range" value="24" min="1" max="100" oninput="this.nextElementSibling.value = this.value">
-            //<output>24</output>
             let labelPeso = document.createElement("label");
             text = document.createTextNode("Pontos (por questão): ");
             labelPeso.appendChild(text);
@@ -85,7 +83,7 @@
             let peso = document.createElement("input");
             peso.name = "peso[]";
             peso.type = "range";
-            peso.min = 1;
+            peso.min = 0.5;
             peso.max = 10;
             peso.value = 1;
             peso.step = 0.5;
@@ -99,6 +97,9 @@
             text = document.createTextNode("1");;
             valorPeso.appendChild(text);
             valorPeso.id = "peso_" + formItem.id
+
+            let mostraPeso = document.createElement("checkbox");
+            mostraPeso.name = "showPeso[]"
 
 
             let excluir = document.createElement("a");
@@ -180,6 +181,10 @@
                 <input type="text" name="nomeProfessor" id="nomeProfessor">
             </div>
 
+            <div id="gabarito">
+                <input type="checkbox" name="showGabarito" id="showGabarito" value="1">
+                <label for="showGabarito">Exibir Gabarito? </label>
+            </div>
 
         </div>
 

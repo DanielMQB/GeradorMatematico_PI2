@@ -32,8 +32,6 @@
             width: 50%;
             float: left;
             margin: auto;
-            background-color: green;
-            border: 1px solid black;
         }
 
         .columns {
@@ -41,14 +39,13 @@
             content: "";
             display: table;
             clear: both;
-            background-color: red;
         }
 
         .tabela {
             width: 100%;
             display: inline-block;
-            margin-top: 70px;
-            margin-left: 37px;
+            margin-top: 30px;
+            margin-left: 80px;
         }
 
         table {
@@ -91,95 +88,96 @@
         @endforeach
 
         <hr>
-        <div class="page-break"></div>
+        @if ($data['Dados']['gabarito'] == 1)
+            <div class="page-break"></div>
+        @endif
     @endforeach
 
 
     {{-- Impressão de Gabaritos --}}
-    <?php
-        $totalProvas = count($data['Provas']);      //Tital de provas
-        $totalQuestoes = count($data['Provas'][0]); //Total de questões
-    ?>
+    @if ($data['Dados']['gabarito'] == 1)
+        <?php
+            $totalProvas = count($data['Provas']);      //Tital de provas
+            $totalQuestoes = count($data['Provas'][0]); //Total de questões
+        ?>
 
-    @if ($totalQuestoes < 30)
-        @for ($p = 0; $p < $totalProvas; $p++)
-            @if ($p == 0 || ($p+1)%2 != 0)
-                <div class="columns">
-            @endif
-            <div class="column">
-                <div class="tabela">
-                    <table>
-                        <tr>
-                            <th colspan=3>Gabarito: {{ $data['Dados']['prefixo'] . $p + 1 }}
-                                ({{ $data['Dados']['pontuacao'] }}
-                                Pontos)</th>
-                        </tr>
-                        <tr>
-                            <th>Questão</th>
-                            <th>Pontos</th>
-                            <th>Resposta</th>
-                        </tr>
-                        @for ($q = 0; $q < $totalQuestoes; $q++)
-                            <tr>
-                                <td>{{ $q + 1 }}</td>
-                                <td>{{ $data['Provas'][$p][$q]['pontos'] }}</td>
-                                <td>{{ $data['Provas'][$p][$q]['resposta'] }}</td>
-                            </tr>
-                        @endfor
-                    </table>
-                </div>
-            </div>
-            @if ($p < $totalProvas || ($p+1)%2 == 0)
-                </div>
-            @endif
-        @endfor
-    @else
-        @for ($p = 0; $p < $totalProvas; $p++)
-            <div class="columns">
-                 <div class="column">
+        @if ($totalQuestoes < 30)
+            @for ($p = 0; $p < $totalProvas; $p++)
+                @if ($p == 0 || ($p+1)%2 != 0)
+                    <div class="columns">
+                @endif
+                <div class="column">
                     <div class="tabela">
                         <table>
                             <tr>
-                                <th colspan=3>Gabarito: {{ $data['Dados']['prefixo'] . $p + 1 }}
+                                <th colspan=2>Gabarito: {{ $data['Dados']['prefixo'] . $p + 1 }}
                                     ({{ $data['Dados']['pontuacao'] }}
                                     Pontos)</th>
                             </tr>
                             <tr>
                                 <th>Questão</th>
-                                <th>Pontos</th>
                                 <th>Resposta</th>
                             </tr>
                             @for ($q = 0; $q < $totalQuestoes; $q++)
-                                @if ($q != 0 && $q%30 == 0)
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="column">
-                                        <div class="tabela">
-                                            <table>
-                                                <tr>
-                                                    <th colspan=3>Gabarito: {{ $data['Dados']['prefixo'] . $p + 1 }}
-                                                        ({{ $data['Dados']['pontuacao'] }}
-                                                        Pontos)</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>Questão</th>
-                                                    <th>Pontos</th>
-                                                    <th>Resposta</th>
-                                                </tr>
-                                @endif
                                 <tr>
                                     <td>{{ $q + 1 }}</td>
-                                    <td>{{ $data['Provas'][$p][$q]['pontos'] }}</td>
                                     <td>{{ $data['Provas'][$p][$q]['resposta'] }}</td>
                                 </tr>
                             @endfor
                         </table>
                     </div>
                 </div>
-            </div>
-        @endfor
+                @if ($p < $totalProvas || ($p+1)%2 == 0)
+                    </div>
+                @endif
+            @endfor
+        @else
+            @for ($p = 0; $p < $totalProvas; $p++)
+                <div class="columns">
+                    <div class="column">
+                        <div class="tabela">
+                            <table>
+                                <tr>
+                                    <th colspan=2>Gabarito: {{ $data['Dados']['prefixo'] . $p + 1 }}
+                                        ({{ $data['Dados']['pontuacao'] }}
+                                        Pontos)</th>
+                                </tr>
+                                <tr>
+                                    <th>Questão</th>
+                                    <th>Resposta</th>
+                                </tr>
+                                @for ($q = 0; $q < $totalQuestoes; $q++)
+                                    @if ($q%30 == 0 && $q != 0)
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <div class = "column">
+                                                <div class = "tabela">
+                                                    <table>
+                                                        <tr>
+                                                            <th colspan=2>Gabarito: {{ $data['Dados']['prefixo'] . $p + 1 }}
+                                                                ({{ $data['Dados']['pontuacao'] }}
+                                                                Pontos)</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Questão</th>
+                                                            <th>Resposta</th>
+                                                        </tr>
+                                    @endif
+                                    <tr>
+                                        <td>{{ $q + 1 }}</td>
+                                        <td>{{ $data['Provas'][$p][$q]['resposta'] }}</td>
+                                    </tr>
+                                @endfor
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            @endfor
+        @endif
     @endif
+
 </body>
 
 </html>
